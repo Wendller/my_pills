@@ -6,6 +6,12 @@ defmodule MyPillsWeb.UsersController do
 
   action_fallback FallbackController
 
+  def index(connection, _params) do
+    connection
+    |> put_status(:ok)
+    |> render("users.json", users: MyPills.get_all_users())
+  end
+
   def create(connection, params) do
     with {:ok, %User{} = user} <- MyPills.create_user(params) do
       connection

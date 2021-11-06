@@ -14,4 +14,10 @@ defmodule MyPillsWeb.UsersView do
       user: user
     }
   end
+
+  def render("users.json", %{users: users}) do
+    %{
+      users: users
+    }
+  end
 end
