@@ -9,6 +9,7 @@ defmodule MyPills.Addresses.Address do
   @foreign_key_type :binary_id
 
   @required_params [:name, :number, :zipcode, :city, :state, :user_id]
+  @update_params @required_params -- [:user_id]
 
   @derive {Jason.Encoder,
            only: [:id, :name, :number, :zipcode, :city, :state, :complement, :user_id]}
@@ -26,10 +27,17 @@ defmodule MyPills.Addresses.Address do
     timestamps()
   end
 
-  def changeset(address \\ %__MODULE__{}, params) do
-    address
+  def changeset(params) do
+    %__MODULE__{}
     |> cast(params, @required_params)
     |> validate_required(@required_params)
+    |> validate_length(:zipcode, is: 8)
+  end
+
+  def changeset(address, params) do
+    address
+    |> cast(params, @update_params)
+    |> validate_required(@update_params)
     |> validate_length(:zipcode, is: 8)
   end
 end

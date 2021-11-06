@@ -12,7 +12,11 @@ defmodule MyPillsWeb.Router do
     pipe_through :api
 
     resources "/users", UsersController, except: [:new, :edit]
-    resources "/addresses", AddressesController, except: [:new, :edit]
+
+    resources "/addresses", AddressesController, except: [:new, :edit, :update]
+    get "/addresses/user/:user_id/address", AddressesController, :get_by_user
+    patch "/addresses/user/:user_id/address/:id", AddressesController, :update
+    delete "/addresses/user/:user_id/address/:id", AddressesController, :delete_by_user
   end
 
   # Enables LiveDashboard only for development
