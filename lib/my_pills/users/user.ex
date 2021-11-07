@@ -5,6 +5,7 @@ defmodule MyPills.Users.User do
 
   alias Ecto.Changeset
   alias MyPills.Addresses.Address
+  alias MyPills.Carts.Cart
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -20,6 +21,7 @@ defmodule MyPills.Users.User do
     field :password, :string, virtual: true
     field :password_hash, :string
 
+    has_one :cart, Cart
     has_many :addresses, Address
 
     timestamps()
