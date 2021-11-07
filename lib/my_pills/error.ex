@@ -14,4 +14,5 @@ defmodule MyPills.Error do
 
   def build_user_not_found_error, do: build(:not_found, "User not found!")
   def build_address_not_found_error, do: build(:not_found, "Address not found!")
+  def build_pill_not_found_error, do: build(:not_found, "Pill not found!")
 end

@@ -17,6 +17,8 @@ defmodule MyPillsWeb.Router do
     get "/addresses/user/:user_id/address", AddressesController, :get_by_user
     patch "/addresses/user/:user_id/address/:id", AddressesController, :update
     delete "/addresses/user/:user_id/address/:id", AddressesController, :delete_by_user
+
+    resources "/pills", PillsController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

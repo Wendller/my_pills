@@ -20,7 +20,7 @@ defmodule MyPills.Pills.Pill do
 
   def changeset(pill \\ %__MODULE__{}, params) do
     pill
-    |> cast(params, @required_params)
+    |> cast(params, @required_params ++ [:image_url])
     |> validate_required(@required_params)
     |> validate_length(:description, min: 6)
     |> validate_number(:unity_price, greater_than: 0)
