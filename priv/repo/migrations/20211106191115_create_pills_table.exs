@@ -7,6 +7,7 @@ defmodule MyPills.Repo.Migrations.CreatePillsTable do
       add :description, :string
       add :unity_price, :decimal
       add :image_url, :string
+      add :at_stock, :integer
 
       timestamps()
     end

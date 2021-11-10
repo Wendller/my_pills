@@ -7,15 +7,16 @@ defmodule MyPills.Pills.Pill do
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
-  @required_params [:name, :description, :unity_price]
+  @required_params [:name, :description, :unity_price, :at_stock]
 
-  @derive {Jason.Encoder, only: [:id, :name, :description, :unity_price, :image_url]}
+  @derive {Jason.Encoder, only: [:id, :name, :description, :unity_price, :image_url, :at_stock]}
 
   schema "pills" do
     field :name, :string
     field :description, :string
     field :unity_price, :decimal
     field :image_url, :string
+    field :at_stock, :integer
 
     many_to_many :carts, Cart, join_through: "carts_pills"
 

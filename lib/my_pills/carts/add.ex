@@ -4,6 +4,7 @@ defmodule MyPills.Carts.Add do
   alias MyPills.Carts.Cart
   alias MyPills.Carts.ValidateUserAndPill
   alias MyPills.Error
+  alias MyPills.Pills.Pill
   alias MyPills.Repo
 
   def call(%{"user_id" => user_id, "pill_id" => pill_id}) do
@@ -21,6 +22,10 @@ defmodule MyPills.Carts.Add do
 
     cart_current_price =
       Enum.reduce(user_cart.pills, 0, fn pill, acc -> Decimal.add(pill.unity_price, acc) end)
+
+    pill
+    |> Pill.changeset(%{at_stock: pill.at_stock - 1})
+    |> Repo.update()
 
     user_cart
     |> Cart.changeset(

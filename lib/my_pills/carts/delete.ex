@@ -3,6 +3,7 @@ defmodule MyPills.Carts.Delete do
   alias MyPills.Carts.Get
   alias MyPills.Carts.ValidateUserAndPill
   alias MyPills.Error
+  alias MyPills.Pills.Pill
   alias MyPills.Repo
 
   def call(%{"user_id" => user_id, "pill_id" => pill_id}) do
@@ -20,6 +21,10 @@ defmodule MyPills.Carts.Delete do
 
     updated_cart_pills = List.delete(user_cart.pills, pill)
 
+    pill
+    |> Pill.changeset(%{at_stock: pill.at_stock + 1})
+    |> Repo.update()
+
     user_cart
     |> Cart.changeset(
       %{
@@ -35,6 +40,9 @@ defmodule MyPills.Carts.Delete do
   def remove_all_pills(user_id) do
     {:ok, user_cart} = Get.by_user_id(user_id)
 
+    user_cart.pills
+    |> Enum.map(&update_pill_at_stock/1)
+
     user_cart
     |> Cart.changeset(
       %{
@@ -45,6 +53,12 @@ defmodule MyPills.Carts.Delete do
     )
     |> Repo.update()
     |> handle_update()
+  end
+
+  defp update_pill_at_stock(pill) do
+    pill
+    |> Pill.changeset(%{at_stock: pill.at_stock + 1})
+    |> Repo.update()
   end
 
   defp handle_update({:ok, %Cart{}} = result), do: result
