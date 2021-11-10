@@ -41,5 +41,3 @@ defmodule MyPills.Addresses.Address do
     |> validate_length(:zipcode, is: 8)
   end
 end
-
-# params = %{name: "rua do wend", number: 5022, zipcode: "64000000", city: "arrakis", state: "PI", complement: "quente", user_id: "0084e627-15be-4c11-b520-316814ea4dcb"}

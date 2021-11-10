@@ -1,9 +1,9 @@
 defmodule MyPills.Addresses.Get do
   import Ecto.Query
 
+  alias MyPills.Addresses.Address
   alias MyPills.Error
   alias MyPills.Repo
-  alias MyPills.Addresses.Address
 
   def by_id(id) do
     case Repo.get(Address, id) do

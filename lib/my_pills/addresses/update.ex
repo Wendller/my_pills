@@ -1,8 +1,8 @@
 defmodule MyPills.Addresses.Update do
   alias MyPills.Addresses.Address
-  alias MyPills.Users.User
   alias MyPills.Error
   alias MyPills.Repo
+  alias MyPills.Users.User
 
   def call(%{"user_id" => user_id, "id" => id} = params) do
     case Repo.get(User, user_id) do

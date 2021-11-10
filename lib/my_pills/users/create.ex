@@ -1,8 +1,8 @@
 defmodule MyPills.Users.Create do
+  alias MyPills.Carts.Cart
   alias MyPills.Error
   alias MyPills.Repo
   alias MyPills.Users.User
-  alias MyPills.Carts.Cart
 
   def call(params) do
     params
@@ -18,8 +18,10 @@ defmodule MyPills.Users.Create do
       user_id: user_id
     }
 
+    cart_pills = []
+
     cart_initial_params
-    |> Cart.changeset()
+    |> Cart.changeset(cart_pills)
     |> Repo.insert()
 
     result

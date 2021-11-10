@@ -1,7 +1,7 @@
 defmodule MyPills.Pills.Delete do
   alias MyPills.Error
-  alias MyPills.Repo
   alias MyPills.Pills.Pill
+  alias MyPills.Repo
 
   def by_id(id) do
     case Repo.get(Pill, id) do

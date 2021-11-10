@@ -1,7 +1,7 @@
 defmodule MyPills.Pills.Create do
   alias MyPills.Error
-  alias MyPills.Repo
   alias MyPills.Pills.Pill
+  alias MyPills.Repo
 
   def call(params) do
     params

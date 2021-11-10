@@ -1,7 +1,7 @@
 defmodule MyPills.Addresses.Delete do
+  alias MyPills.Addresses.Address
   alias MyPills.Error
   alias MyPills.Repo
-  alias MyPills.Addresses.Address
   alias MyPills.Users.User
 
   def by_id(id) do

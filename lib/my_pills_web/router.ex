@@ -19,6 +19,11 @@ defmodule MyPillsWeb.Router do
     delete "/addresses/user/:user_id/address/:id", AddressesController, :delete_by_user
 
     resources "/pills", PillsController, except: [:new, :edit]
+
+    post "/carts/user/:user_id/pill/:pill_id", CartsController, :add_to_cart
+    get "/carts/user/:user_id", CartsController, :show
+    delete "/carts/user/:user_id/pill/:pill_id", CartsController, :remove_pill
+    delete "/carts/user/:user_id", CartsController, :remove_all
   end
 
   # Enables LiveDashboard only for development

@@ -3,6 +3,8 @@ defmodule MyPills.Pills.Pill do
 
   import Ecto.Changeset
 
+  alias MyPills.Carts.Cart
+
   @primary_key {:id, :binary_id, autogenerate: true}
 
   @required_params [:name, :description, :unity_price]
@@ -14,6 +16,8 @@ defmodule MyPills.Pills.Pill do
     field :description, :string
     field :unity_price, :decimal
     field :image_url, :string
+
+    many_to_many :carts, Cart, join_through: "carts_pills"
 
     timestamps()
   end

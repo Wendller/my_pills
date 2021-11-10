@@ -1,7 +1,7 @@
 defmodule MyPills.Pills.Update do
   alias MyPills.Error
-  alias MyPills.Repo
   alias MyPills.Pills.Pill
+  alias MyPills.Repo
 
   def call(%{"id" => id} = params) do
     case Repo.get(Pill, id) do

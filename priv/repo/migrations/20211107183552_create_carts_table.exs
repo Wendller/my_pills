@@ -9,5 +9,7 @@ defmodule MyPills.Repo.Migrations.CreateCartsTable do
 
       timestamps()
     end
+
+    create unique_index(:carts, [:user_id])
   end
 end
