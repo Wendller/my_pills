@@ -4,6 +4,7 @@ defmodule MyPills.Addresses.Address do
   import Ecto.Changeset
 
   alias MyPills.Users.User
+  alias MyPills.Orders.Order
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -23,6 +24,7 @@ defmodule MyPills.Addresses.Address do
     field :complement, :string
 
     belongs_to :user, User
+    has_many :orders, Order
 
     timestamps()
   end

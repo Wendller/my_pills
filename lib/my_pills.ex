@@ -8,6 +8,11 @@ defmodule MyPills do
   alias MyPills.Carts.Get, as: GetCart
   alias MyPills.Carts.Delete, as: RemovePillFromCart
 
+  alias MyPills.Orders.Create, as: CreateOrder
+  alias MyPills.Orders.Delete, as: DeleteOrder
+  alias MyPills.Orders.Get, as: GetOrder
+  alias MyPills.Orders.Update, as: UpdateOrder
+
   alias MyPills.Pills.Create, as: CreatePill
   alias MyPills.Pills.Delete, as: DeletePill
   alias MyPills.Pills.Get, as: GetPill
@@ -30,6 +35,11 @@ defmodule MyPills do
   defdelegate get_user_cart(user_id), to: GetCart, as: :by_user_id
   defdelegate remove_pill_from_cart(params), to: RemovePillFromCart, as: :call
   defdelegate remove_all_from_cart(user_id), to: RemovePillFromCart, as: :remove_all_pills
+
+  defdelegate create_order(params), to: CreateOrder, as: :call
+  defdelegate get_order(order_id), to: GetOrder, as: :by_id
+  defdelegate update_order(params), to: UpdateOrder, as: :call
+  defdelegate delete_order(id), to: DeleteOrder, as: :by_id
 
   defdelegate create_pill(params), to: CreatePill, as: :call
   defdelegate get_pill(id), to: GetPill, as: :by_id

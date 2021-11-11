@@ -24,6 +24,11 @@ defmodule MyPillsWeb.Router do
     get "/carts/user/:user_id", CartsController, :show
     delete "/carts/user/:user_id/pill/:pill_id", CartsController, :remove_pill
     delete "/carts/user/:user_id", CartsController, :remove_all
+
+    post "/orders", OrdersController, :create
+    get "/orders/:order_id", OrdersController, :show
+    patch "/orders/:order_id", OrdersController, :update
+    delete "/orders/:order_id", OrdersController, :delete
   end
 
   # Enables LiveDashboard only for development

@@ -9,6 +9,8 @@ defmodule MyPills.Repo.Migrations.CreateOrdersTable do
       add :payment_day, :date
       add :address_id, references(:addresses, type: :binary_id)
       add :user_id, references(:users, type: :binary_id, on_delete: :delete_all)
+
+      timestamps()
     end
   end
 end
