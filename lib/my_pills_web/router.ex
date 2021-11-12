@@ -27,6 +27,8 @@ defmodule MyPillsWeb.Router do
 
     post "/orders", OrdersController, :create
     get "/orders/:order_id", OrdersController, :show
+    get "/orders/user/:user_id", OrdersController, :get_by_user
+    get "/orders", OrdersController, :index
     patch "/orders/:order_id", OrdersController, :update
     delete "/orders/:order_id", OrdersController, :delete
   end

@@ -14,8 +14,22 @@ defmodule MyPillsWeb.OrdersController do
     end
   end
 
+  def index(connection, _params) do
+    connection
+    |> put_status(:ok)
+    |> render("orders.json", orders: MyPills.get_all_orders())
+  end
+
+  def get_by_user(connection, %{"user_id" => user_id}) do
+    with [_head | _tail] = orders <- MyPills.get_order_by_user_id(user_id) do
+      connection
+      |> put_status(:ok)
+      |> render("order_by_user.json", user_id: user_id, orders: orders)
+    end
+  end
+
   def show(connection, %{"order_id" => id}) do
-    with {:ok, %Order{} = order} <- MyPills.get_order(id) do
+    with {:ok, %Order{} = order} <- MyPills.get_order_by_id(id) do
       connection
       |> put_status(:ok)
       |> render("order.json", order: order)

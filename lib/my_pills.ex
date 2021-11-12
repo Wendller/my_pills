@@ -37,7 +37,10 @@ defmodule MyPills do
   defdelegate remove_all_from_cart(user_id), to: RemovePillFromCart, as: :remove_all_pills
 
   defdelegate create_order(params), to: CreateOrder, as: :call
-  defdelegate get_order(order_id), to: GetOrder, as: :by_id
+  defdelegate get_order_by_id(order_id), to: GetOrder, as: :by_id
+  defdelegate get_order_by_user_id(user_id), to: GetOrder, as: :by_user
+  defdelegate get_all_orders(), to: GetOrder, as: :all
+
   defdelegate update_order(params), to: UpdateOrder, as: :call
   defdelegate delete_order(id), to: DeleteOrder, as: :by_id
 

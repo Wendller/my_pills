@@ -8,4 +8,17 @@ defmodule MyPillsWeb.OrdersView do
       order: order
     }
   end
+
+  def render("orders.json", %{orders: orders}) do
+    %{
+      orders: orders
+    }
+  end
+
+  def render("order_by_user.json", %{user_id: user_id, orders: orders}) do
+    %{
+      user_id: user_id,
+      orders: orders
+    }
+  end
 end
