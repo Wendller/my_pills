@@ -14,6 +14,10 @@ config :my_pills, MyPills.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :my_pills, MyPillsWeb.Auth.Guardian,
+  issuer: "my_pills",
+  secret_key: "pxDNJxCp6cwkGuc8S7Ea0CAEtCsrIXRnTfh5/vk1e/b1KufwUiA6DtgL2Wx1GyE3"
+
 # Configures the endpoint
 config :my_pills, MyPillsWeb.Endpoint,
   url: [host: "localhost"],

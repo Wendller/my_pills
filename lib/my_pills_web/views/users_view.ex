@@ -3,9 +3,10 @@ defmodule MyPillsWeb.UsersView do
 
   alias MyPills.Users.User
 
-  def render("create.json", %{user: %User{} = user}) do
+  def render("create.json", %{user: %User{} = user, token: token}) do
     %{
-      user: user
+      user: user,
+      token: token
     }
   end
 

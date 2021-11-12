@@ -2,6 +2,7 @@ defmodule MyPillsWeb.UsersController do
   use MyPillsWeb, :controller
 
   alias MyPills.Users.User
+  alias MyPillsWeb.Auth.Guardian
   alias MyPillsWeb.FallbackController
 
   action_fallback FallbackController
@@ -13,10 +14,12 @@ defmodule MyPillsWeb.UsersController do
   end
 
   def create(connection, params) do
-    with {:ok, %User{} = user} <- MyPills.create_user(params) do
+    with {:ok, %User{} = user} <- MyPills.create_user(params),
+         {:ok, token, _claims} <-
+           Guardian.encode_and_sign(user, %{}, ttl: {1, :hour}, token_type: "refresh") do
       connection
       |> put_status(:created)
-      |> render("create.json", user: user)
+      |> render("create.json", user: user, token: token)
     end
   end
 
