@@ -21,4 +21,6 @@ defmodule MyPillsWeb.UsersView do
       users: users
     }
   end
+
+  def render("sign_in.json", %{token: token}), do: %{token: token}
 end

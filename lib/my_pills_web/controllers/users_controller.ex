@@ -46,4 +46,12 @@ defmodule MyPillsWeb.UsersController do
       |> text("")
     end
   end
+
+  def sign_in(connenction, params) do
+    with {:ok, token} <- Guardian.authenticate(params) do
+      connenction
+      |> put_status(:ok)
+      |> render("sign_in.json", token: token)
+    end
+  end
 end

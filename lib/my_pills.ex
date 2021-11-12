@@ -40,7 +40,6 @@ defmodule MyPills do
   defdelegate get_order_by_id(order_id), to: GetOrder, as: :by_id
   defdelegate get_order_by_user_id(user_id), to: GetOrder, as: :by_user
   defdelegate get_all_orders(), to: GetOrder, as: :all
-
   defdelegate update_order(params), to: UpdateOrder, as: :call
   defdelegate delete_order(id), to: DeleteOrder, as: :by_id
 
@@ -53,6 +52,7 @@ defmodule MyPills do
   defdelegate create_user(params), to: CreateUser, as: :call
   defdelegate get_all_users(), to: GetUser, as: :all
   defdelegate get_user_by_id(id), to: GetUser, as: :by_id
+  defdelegate get_user_by_email(email), to: GetUser, as: :by_email
   defdelegate update_user(params), to: UpdateUser, as: :call
   defdelegate delete_user(id), to: DeleteUser, as: :by_id
 end

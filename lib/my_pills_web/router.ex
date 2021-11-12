@@ -12,6 +12,7 @@ defmodule MyPillsWeb.Router do
     pipe_through :api
 
     resources "/users", UsersController, except: [:new, :edit]
+    post "/users/signin", UsersController, :sign_in
 
     resources "/addresses", AddressesController, except: [:new, :edit, :update]
     get "/addresses/user/:user_id/address", AddressesController, :get_by_user
