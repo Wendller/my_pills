@@ -8,11 +8,14 @@ defmodule MyPillsWeb.Router do
     plug UUIDChecker
   end
 
-  scope "/api", MyPillsWeb do
-    pipe_through :api
+  pipeline :user_auth do
+    plug MyPillsWeb.Auth.User.Pipeline
+  end
 
-    resources "/users", UsersController, except: [:new, :edit]
-    post "/users/signin", UsersController, :sign_in
+  scope "/api", MyPillsWeb do
+    pipe_through [:api, :user_auth]
+
+    resources "/users", UsersController, except: [:new, :edit, :create]
 
     resources "/addresses", AddressesController, except: [:new, :edit, :update]
     get "/addresses/user/:user_id/address", AddressesController, :get_by_user
@@ -32,6 +35,13 @@ defmodule MyPillsWeb.Router do
     get "/orders", OrdersController, :index
     patch "/orders/:order_id", OrdersController, :update
     delete "/orders/:order_id", OrdersController, :delete
+  end
+
+  scope "/api", MyPillsWeb do
+    pipe_through :api
+
+    post "/users/signin", UsersController, :sign_in
+    post "/users", UsersController, :create
   end
 
   # Enables LiveDashboard only for development

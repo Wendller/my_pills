@@ -1,4 +1,4 @@
-defmodule MyPillsWeb.Auth.Guardian do
+defmodule MyPillsWeb.Auth.User.Guardian do
   use Guardian, otp_app: :my_pills
 
   alias MyPills.Error

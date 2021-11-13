@@ -2,7 +2,7 @@ defmodule MyPillsWeb.UsersController do
   use MyPillsWeb, :controller
 
   alias MyPills.Users.User
-  alias MyPillsWeb.Auth.Guardian
+  alias MyPillsWeb.Auth.User.Guardian
   alias MyPillsWeb.FallbackController
 
   action_fallback FallbackController
