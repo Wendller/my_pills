@@ -62,6 +62,28 @@ defmodule MyPillsWeb.Router do
     post "/users", UsersController, :create
   end
 
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :my_pills, swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "0.0.1",
+        title: "My Pills"
+      },
+      basePath: "/api",
+      tags: [
+        %{name: "Users", description: "Operations about users"},
+        %{name: "Addresses", description: "Operations about user's addresses"},
+        %{name: "Pills", description: "All about the pills of the store"},
+        %{name: "Carts", description: "Operations about user's cart"},
+        %{name: "Orders", description: "All about the orders made by users"},
+        %{name: "Admins", description: "Operations about admins of store"}
+      ]
+    }
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

@@ -1,0 +1,137 @@
+{
+  "basePath": "/api",
+  "definitions": {
+    "User": {
+      "description": "A user of the store",
+      "example": {
+        "cpf": "12345678900",
+        "email": "mscott@mail.com",
+        "id": "c6113332-d1cb-4926-854f-d623fd3c481e",
+        "name": "Michael Sott",
+        "password": "123456"
+      },
+      "properties": {
+        "cpf": {
+          "description": "Users cpf",
+          "type": "string"
+        },
+        "email": {
+          "description": "Users email",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique uuid identifier",
+          "type": "uuid"
+        },
+        "name": {
+          "description": "Users name",
+          "type": "string"
+        },
+        "password": {
+          "description": "Users password",
+          "type": "string"
+        }
+      },
+      "required": [
+        "password",
+        "cpf",
+        "email",
+        "id",
+        "name"
+      ],
+      "title": "User",
+      "type": "object"
+    }
+  },
+  "host": "localhost:4000",
+  "info": {
+    "title": "My Pills",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "operationId": "MyPillsWeb.UsersController.create",
+        "parameters": [
+          {
+            "description": "User name",
+            "in": "body",
+            "name": "name",
+            "required": true,
+            "schema": "string"
+          },
+          {
+            "description": "User email",
+            "in": "body",
+            "name": "email",
+            "required": true,
+            "schema": "string"
+          },
+          {
+            "description": "User cpf",
+            "in": "body",
+            "name": "cpf",
+            "required": true,
+            "schema": "string"
+          },
+          {
+            "description": "Users password",
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "schema": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Create a new user",
+        "tags": [
+          "Users"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Operations about users",
+      "name": "Users"
+    },
+    {
+      "description": "Operations about user's addresses",
+      "name": "Addresses"
+    },
+    {
+      "description": "All about the pills of the store",
+      "name": "Pills"
+    },
+    {
+      "description": "Operations about user's cart",
+      "name": "Carts"
+    },
+    {
+      "description": "All about the orders made by users",
+      "name": "Orders"
+    },
+    {
+      "description": "Operations about admins of store",
+      "name": "Admins"
+    }
+  ]
+}

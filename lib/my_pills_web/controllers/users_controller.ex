@@ -1,11 +1,57 @@
 defmodule MyPillsWeb.UsersController do
   use MyPillsWeb, :controller
 
+  import PhoenixSwagger
+
   alias MyPills.Users.User
   alias MyPillsWeb.Auth.User.Guardian
   alias MyPillsWeb.FallbackController
+  alias PhoenixSwagger.Schema
 
   action_fallback FallbackController
+
+  def swagger_definitions do
+    %{
+      User:
+        swagger_schema do
+          title("User")
+          description("A user of the store")
+
+          properties do
+            name(:string, "Users name", required: true)
+            id(:uuid, "Unique uuid identifier", required: true)
+            email(:string, "Users email", required: true)
+            cpf(:string, "Users cpf", required: true)
+            password(:string, "Users password", required: true)
+          end
+
+          example(%{
+            name: "Michael Sott",
+            id: "c6113332-d1cb-4926-854f-d623fd3c481e",
+            email: "mscott@mail.com",
+            cpf: "12345678900",
+            password: "123456"
+          })
+        end
+    }
+  end
+
+  swagger_path :create do
+    post("/users")
+    summary("Create a new user")
+    consumes("application/json")
+    produces("application/json")
+
+    parameters do
+      name(:body, :string, "User name", required: true)
+      email(:body, :string, "User email", required: true)
+      cpf(:body, :string, "User cpf", required: true)
+      password(:body, :string, "Users password", required: true)
+    end
+
+    response(200, "OK", Schema.ref(:User))
+    response(401, "Unauthorized")
+  end
 
   def index(connection, _params) do
     connection

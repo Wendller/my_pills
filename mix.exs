@@ -8,6 +8,7 @@ defmodule MyPills.MixProject do
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers() ++ [:phoenix_swagger],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -49,7 +50,10 @@ defmodule MyPills.MixProject do
       {:pbkdf2_elixir, "~> 1.3"},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:phoenix_swagger, "~> 0.8"},
+      # optional
+      {:ex_json_schema, "~> 0.5"}
     ]
   end
 

@@ -30,6 +30,18 @@ config :my_pills, MyPillsWeb.Auth.Admin.Pipeline,
   module: MyPillsWeb.Auth.Admin.Guardian,
   error_handler: MyPillsWeb.Auth.ErrorHandler
 
+config :my_pills, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      # phoenix routes will be converted to swagger paths
+      router: MyPillsWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: MyPillsWeb.Endpoint
+    ]
+  }
+
+config :phoenix_swagger, json_library: Jason
+
 # Configures the endpoint
 config :my_pills, MyPillsWeb.Endpoint,
   url: [host: "localhost"],
