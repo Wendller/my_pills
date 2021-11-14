@@ -16,4 +16,36 @@ defmodule MyPillsWeb.AdminsController do
       |> render("create.json", admin: admin, token: token)
     end
   end
+
+  def show(connection, %{"id" => id}) do
+    with {:ok, %Admin{} = admin} <- MyPills.get_admin_by_id(id) do
+      connection
+      |> put_status(:ok)
+      |> render("admin.json", admin: admin)
+    end
+  end
+
+  def update(connection, params) do
+    with {:ok, %Admin{} = admin} <- MyPills.update_admin(params) do
+      connection
+      |> put_status(:ok)
+      |> render("admin.json", admin: admin)
+    end
+  end
+
+  def delete(connection, %{"id" => id}) do
+    with {:ok, %Admin{}} <- MyPills.delete_admin(id) do
+      connection
+      |> put_status(:no_content)
+      |> text("")
+    end
+  end
+
+  def sign_in(connenction, params) do
+    with {:ok, token} <- Guardian.authenticate(params) do
+      connenction
+      |> put_status(:ok)
+      |> render("sign_in.json", token: token)
+    end
+  end
 end

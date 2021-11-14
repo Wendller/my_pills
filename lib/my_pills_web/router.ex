@@ -17,16 +17,26 @@ defmodule MyPillsWeb.Router do
   end
 
   scope "/api", MyPillsWeb do
+    pipe_through [:api, :admin_auth]
+
+    get "/users", UsersController, :index
+
+    get "/addresses", AddressesController, :index
+
+    resources "/pills", PillsController, except: [:new, :edit]
+
+    get "/orders", OrdersController, :index
+  end
+
+  scope "/api", MyPillsWeb do
     pipe_through [:api, :user_auth]
 
-    resources "/users", UsersController, except: [:new, :edit, :create]
+    resources "/users", UsersController, except: [:new, :edit, :create, :index]
 
-    resources "/addresses", AddressesController, except: [:new, :edit, :update]
+    resources "/addresses", AddressesController, except: [:new, :edit, :update, :index]
     get "/addresses/user/:user_id/address", AddressesController, :get_by_user
     patch "/addresses/user/:user_id/address/:id", AddressesController, :update
     delete "/addresses/user/:user_id/address/:id", AddressesController, :delete_by_user
-
-    resources "/pills", PillsController, except: [:new, :edit]
 
     post "/carts/user/:user_id/pill/:pill_id", CartsController, :add_to_cart
     get "/carts/user/:user_id", CartsController, :show
@@ -36,7 +46,6 @@ defmodule MyPillsWeb.Router do
     post "/orders", OrdersController, :create
     get "/orders/:order_id", OrdersController, :show
     get "/orders/user/:user_id", OrdersController, :get_by_user
-    get "/orders", OrdersController, :index
     patch "/orders/:order_id", OrdersController, :update
     delete "/orders/:order_id", OrdersController, :delete
   end
@@ -44,6 +53,7 @@ defmodule MyPillsWeb.Router do
   scope "/api", MyPillsWeb do
     pipe_through :api
 
+    post "/admins/signin", AdminsController, :sign_in
     post "/admins", AdminsController, :create
 
     post "/users/signin", UsersController, :sign_in
