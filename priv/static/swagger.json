@@ -1,137 +1,86 @@
 {
-  "basePath": "/api",
-  "definitions": {
-    "User": {
-      "description": "A user of the store",
-      "example": {
-        "cpf": "12345678900",
-        "email": "mscott@mail.com",
-        "id": "c6113332-d1cb-4926-854f-d623fd3c481e",
-        "name": "Michael Sott",
-        "password": "123456"
-      },
-      "properties": {
-        "cpf": {
-          "description": "Users cpf",
-          "type": "string"
-        },
-        "email": {
-          "description": "Users email",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique uuid identifier",
-          "type": "uuid"
-        },
-        "name": {
-          "description": "Users name",
-          "type": "string"
-        },
-        "password": {
-          "description": "Users password",
-          "type": "string"
-        }
-      },
-      "required": [
-        "password",
-        "cpf",
-        "email",
-        "id",
-        "name"
-      ],
-      "title": "User",
-      "type": "object"
-    }
-  },
-  "host": "localhost:4000",
+  "swagger": "2.0",
   "info": {
     "title": "My Pills",
-    "version": "0.0.1"
+    "description": "A store server sample",
+    "termsOfService": "open for public",
+    "contact": {
+      "name": "Wendler",
+      "email": "wendlerdeveloper@gmail.com"
+    },
+    "version": "1.0.0"
   },
+  "basePath": "/api",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Everything about users"
+    }
+  ],
   "paths": {
     "/users": {
       "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "description": "",
-        "operationId": "MyPillsWeb.UsersController.create",
+        "tags": ["Users"],
+        "summary": "Create a new user",
+        "description": "Add a new user to the store database",
+        "operationId": "addUser",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "description": "User name",
-            "in": "body",
             "name": "name",
+            "in": "body",
+            "description": "User complete name",
             "required": true,
-            "schema": "string"
+            "type": "string"
           },
           {
-            "description": "User email",
-            "in": "body",
             "name": "email",
+            "in": "body",
+            "description": "User email",
             "required": true,
-            "schema": "string"
+            "type": "string"
           },
           {
-            "description": "User cpf",
-            "in": "body",
-            "name": "cpf",
-            "required": true,
-            "schema": "string"
-          },
-          {
-            "description": "Users password",
-            "in": "body",
             "name": "password",
+            "in": "body",
+            "description": "User password to enter in store",
             "required": true,
-            "schema": "string"
+            "type": "string"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/User"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
-        },
-        "summary": "Create a new user",
-        "tags": [
-          "Users"
-        ]
+        }
       }
     }
   },
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Operations about users",
-      "name": "Users"
-    },
-    {
-      "description": "Operations about user's addresses",
-      "name": "Addresses"
-    },
-    {
-      "description": "All about the pills of the store",
-      "name": "Pills"
-    },
-    {
-      "description": "Operations about user's cart",
-      "name": "Carts"
-    },
-    {
-      "description": "All about the orders made by users",
-      "name": "Orders"
-    },
-    {
-      "description": "Operations about admins of store",
-      "name": "Admins"
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     }
-  ]
+  }
 }
