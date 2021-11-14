@@ -19,6 +19,8 @@ defmodule MyPillsWeb.Router do
   scope "/api", MyPillsWeb do
     pipe_through [:api, :admin_auth]
 
+    resources "/admins", AdminsController, except: [:new, :edit, :create]
+
     get "/users", UsersController, :index
 
     get "/addresses", AddressesController, :index

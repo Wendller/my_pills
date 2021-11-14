@@ -17,6 +17,12 @@ defmodule MyPillsWeb.AdminsController do
     end
   end
 
+  def index(connection, _params) do
+    connection
+    |> put_status(:ok)
+    |> render("admins.json", admins: MyPills.get_all_admins())
+  end
+
   def show(connection, %{"id" => id}) do
     with {:ok, %Admin{} = admin} <- MyPills.get_admin_by_id(id) do
       connection

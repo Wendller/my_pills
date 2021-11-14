@@ -41,6 +41,7 @@ defmodule MyPills do
   defdelegate create_admin(params), to: CreateAdmin, as: :call
   defdelegate get_admin_by_id(id), to: GetAdmin, as: :by_id
   defdelegate get_admin_by_email(email), to: GetAdmin, as: :by_email
+  defdelegate get_all_admins(), to: GetAdmin, as: :all
   defdelegate update_admin(params), to: UpdateAdmin, as: :call
   defdelegate delete_admin(id), to: DeleteAdmin, as: :by_id
 

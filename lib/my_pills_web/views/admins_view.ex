@@ -16,5 +16,11 @@ defmodule MyPillsWeb.AdminsView do
     }
   end
 
+  def render("admins.json", %{admins: admins}) do
+    %{
+      admins: admins
+    }
+  end
+
   def render("sign_in.json", %{token: token}), do: %{token: token}
 end
