@@ -8,6 +8,10 @@ defmodule MyPillsWeb.Router do
     plug UUIDChecker
   end
 
+  pipeline :admin_auth do
+    plug MyPillsWeb.Auth.Admin.Pipeline
+  end
+
   pipeline :user_auth do
     plug MyPillsWeb.Auth.User.Pipeline
   end
@@ -39,6 +43,8 @@ defmodule MyPillsWeb.Router do
 
   scope "/api", MyPillsWeb do
     pipe_through :api
+
+    post "/admins", AdminsController, :create
 
     post "/users/signin", UsersController, :sign_in
     post "/users", UsersController, :create

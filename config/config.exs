@@ -18,8 +18,16 @@ config :my_pills, MyPillsWeb.Auth.User.Guardian,
   issuer: "my_pills",
   secret_key: "pxDNJxCp6cwkGuc8S7Ea0CAEtCsrIXRnTfh5/vk1e/b1KufwUiA6DtgL2Wx1GyE3"
 
+config :my_pills, MyPillsWeb.Auth.Admin.Guardian,
+  issuer: "my_pills",
+  secret_key: "qd0Pwxr5ABJetYrKxuJotytUmYcW1+rfdI1Emehms/cB8p5IjhOGi50Pua7ydNID"
+
 config :my_pills, MyPillsWeb.Auth.User.Pipeline,
   module: MyPillsWeb.Auth.User.Guardian,
+  error_handler: MyPillsWeb.Auth.ErrorHandler
+
+config :my_pills, MyPillsWeb.Auth.Admin.Pipeline,
+  module: MyPillsWeb.Auth.Admin.Guardian,
   error_handler: MyPillsWeb.Auth.ErrorHandler
 
 # Configures the endpoint

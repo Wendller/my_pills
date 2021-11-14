@@ -4,6 +4,9 @@ defmodule MyPills do
   alias MyPills.Addresses.Get, as: GetAddress
   alias MyPills.Addresses.Update, as: UpdateAddress
 
+  alias MyPills.Admins.Create, as: CreateAdmin
+  alias MyPills.Admins.Get, as: GetAdmin
+
   alias MyPills.Carts.Add, as: AddPillToCart
   alias MyPills.Carts.Get, as: GetCart
   alias MyPills.Carts.Delete, as: RemovePillFromCart
@@ -30,6 +33,10 @@ defmodule MyPills do
   defdelegate update_address(params), to: UpdateAddress, as: :call
   defdelegate delete_address(id), to: DeleteAddress, as: :by_id
   defdelegate delete_user_address(user_id, id), to: DeleteAddress, as: :by_user
+
+  defdelegate create_admin(params), to: CreateAdmin, as: :call
+  defdelegate get_admin_by_id(id), to: GetAdmin, as: :by_id
+  defdelegate get_admin_by_email(email), to: GetAdmin, as: :by_email
 
   defdelegate add_pill_to_cart(params), to: AddPillToCart, as: :call
   defdelegate get_user_cart(user_id), to: GetCart, as: :by_user_id
